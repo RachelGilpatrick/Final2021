@@ -40,7 +40,7 @@ $H_A$: There is a difference in covid-19 vaccine effectiveness among different s
 
 # Males
 
-### Barplot
+
 
 ```{r}
 dd2 <- guy %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
@@ -57,10 +57,15 @@ basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment))
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```
 
-This plot represents the population of guys(males) people and the relationship to the contraction of covid-19 by either talking the vaccine or the placebo. 
 
 
-The plot above shows that a shocking 58% of the people that took the vaccine did in fact get covid-19, while only approximately 42% of the people taking the placebo contracted covid-19.  A substantially higher percentage of people who took tha vaccine contracted covid-19 versus those who were only given the placebo. The vaccine appears to be ineffective in protection against covid-19. The odds of getting covid-19 while taking the vaccine is 3:2. The men that took the drug were one and half times more likely to get covid-19 than those taking the placebo.
+
+
+
+This plot represents the population of guys(males) people and the relationship to the contraction of covid-19 by either taking the vaccine or the placebo. 
+
+
+The plot above shows that a shocking 58% of the people that took the vaccine did in fact get covid-19, while only approximately 42% of the people taking the placebo contracted covid-19. A substantially higher percentage of people who took the vaccine contracted covid-19 versus those who were only given the placebo. The vaccine appears to be ineffective in protection against covid-19. The odds of getting covid-19 while taking the vaccine is 3:2. The men that took the drug were one and half times more likely to get covid-19 than those taking the placebo.
 
 
 There are two plots. In first plot,the x-axis represents infected, whether the participants were infected with covid-19 or they were not. The y-axis represents the count, or number of people that got covid-19 or not.
