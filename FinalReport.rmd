@@ -94,31 +94,41 @@ The odds of getting covid-19 while taking the vaccine is 3:2. The men that took 
 ```{r}
 chisq.test(table1)
 chisqtestGC(table1)
-guysfish <- fisher.test(table1)
-guysfish
+guyfish <- fisher.test(table1)
+guyfish
 ```
-The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 6e-04. This is an awfully small number. seeing this number means that these results are not likely to occur by chance.
+
+
+
+
+The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 0.0005801. This is an awfully small number. seeing this number means that these results are not likely to occur by chance.
 
 
 
 The null hypothesis predicted that the deaths related to covid-19 are independent of sex. Since it is clear that sex does play a role in the death rate of individuals, the alternative hypothesis, that there is a correlation between covid-19 deaths and sex, is the favorable option.
 
-The odd ratio above illustrates a ratio of 0.68. the guys(men) who received tha vaccine were 1.5 times more likely to get covid-19 than those who received the placebo. 
+The odd ratio above illustrates a ratio of 0.68. the guys(men) who received the vaccine were 1.5 times more likely to get covid-19 than those who received the placebo. 
+
 
 ```{r}
-low=(guysfish$conf.int[1]/(guysfish$conf.int[1] +1))*100
-hi=(guysfish$conf.int[2]/(guysfish$conf.int[2] +1))*100
+effect <- guyfish$p.value/(guyfish$p.value +1)
+effectivenessguy = guyfish$estimate/(guyfish$estimate +1)*100
+print(effectivenessguy)
+```
+
+```{r}
+low=(guyfish$conf.int[1]/(guyfish$conf.int[1] +1))*100
+hi=(guyfish$conf.int[2]/(guyfish$conf.int[2] +1))*100
 options(digits=2)
 ```
 
-Above is the effectiveness for the covid-19 vaccine for guys(males). If the effectiveness is above 50% that means that the vaccine is effective. Based on the interval seen above, we cn conclude that the vaccine is ineffective in protecting guys from getting covid-19. 
+Above is the effectiveness for the covid-19 vaccine for guys(males). If the effectiveness is above 50% that means that the vaccine is effective. Based on the interval seen above, we can conclude that the vaccine is ineffective in protecting guys from getting covid-19. 
 
 The odds ratio is approximately how effective the vaccine is. The odds ratio for the guys can be seen above as 40. The effectiveness confidence interval for the guys is 35.09 to 45.94.
 
-
 # Females
 
-### Barplot
+
 
 ```{r}
 dd2 <- gal %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
