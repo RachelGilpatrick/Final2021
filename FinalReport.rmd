@@ -77,11 +77,17 @@ The codes that  create this plot start with the code block beginning with dd2. d
 
 ### Numerical Results
 
+
+
+
 ```{r}
 table1 <- xtabs(~infected + treatment, data=guy)
 rowPerc(table1)
 colPerc(table1)
 ```
+These numerical results show specific percentages of guys(males) that got covid-19 after taking the placebo and taking the vaccine.
+Among the guys, 58% got covid-19 after taking the vaccine, while approximately 42% of guys that were given the placebo contracted covid-19. The vaccine is clearly not effective in preventing covid-19 in guys(males) and it is not recommended. Those who took th eplacebo were less likely to contract covid-19.
+The odds of getting covid-19 while taking the vaccine is 3:2. The men that took the drug were one and half times more likely to get covid-19 than those taking the placebo.
 
 ### Inferential Results
 
