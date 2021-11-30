@@ -271,26 +271,29 @@ The odds of getting covid-19 while taking the vaccine is 1:2. The drug users tha
 ```{r}
 chisq.test(table1)
 chisqtestGC(table1)
-galsfish <- fisher.test(table1)
-galsfish
-```
-The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 4e-16. This is an awfully small number. seeing this number means that these results are not likely to occur by chance.
-
-
-
-The null hypothesis predicted that the deaths related to covid-19 are independent of sex. Since it is clear that sex does play a role in the death rate of individuals, the alternative hypothesis, that there is a correlation between covid-19 deaths and sex, is the favorable option.
-
-The odd ratio above illustrates a ratio of 2.00. the gals(females) who received the vaccine were 1.5 times more likely to get covid-19 than those who received the placebo. 
-
-```{r}
-effect <- galsfish$p.value/(galsfish$p.value +1)
-effectivenessguy = galsfish$estimate/(galsfish$estimate +1)*100
-print(effectivenessguy)
+Druguserfish <- fisher.test(table1)
+Druguserfish
 ```
 
+
+The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at .002. This is an awfully small number. seeing this number means that these results are not likely to occur by chance.
+
+
+
+The null hypothesis predicted that the civid-19 vaccine effectiveness is independent of subgroup. Since it is clear that subgroup does play a role in the rate of infection in individuals who were vaccinated, the alternative hypothesis, that there is a correlation between covid-19 infection rate in those vaccinated and subgroups, is the favorable option.
+
+The odd ratio above illustrates a ratio of 1.8. The drug users who received the vaccine were half likely to get covid-19 than those who received the placebo. 
+
+
 ```{r}
-low=(galsfish$conf.int[1]/(galsfish$conf.int[1] +1))*100
-hi=(galsfish$conf.int[2]/(galsfish$conf.int[2] +1))*100
+effect <- Druguserfish$p.value/(Druguserfish$p.value +1)
+effectivenessDruguser = Druguserfish$estimate/(Druguserfish$estimate +1)*100
+print(effectivenessDruguser)
+```
+
+```{r}
+low=(Druguserfish$conf.int[1]/(Druguserfish$conf.int[1] +1))*100
+hi=(Druguserfish$conf.int[2]/(Druguserfish$conf.int[2] +1))*100
 options(digits=2)
 ```
 
