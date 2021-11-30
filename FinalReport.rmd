@@ -353,5 +353,46 @@ The odds of getting covid-19 while taking the vaccine is 3:1 for LGBTQ. The LGBT
 
 ### Inferential Results
 
-# Conclusions and recommendations
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+gayfish <- fisher.test(table1)
+gayfish
+```
 
+The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at .00006. This is an awfully small number. seeing this number means that these results are not likely to occur by chance.
+
+
+
+The null hypothesis predicted that the civid-19 vaccine effectiveness is independent of subgroup. Since it is clear that subgroup does play a role in the rate of infection in individuals who were vaccinated, the alternative hypothesis, that there is a correlation between covid-19 infection rate in those vaccinated and subgroups, is the favorable option.
+
+The odd ratio above illustrates a ratio of 0.4. The LGBTQ who received the vaccine were as likely to get covid-19 than those who received the placebo. 
+
+```{r}
+effect <- gayfish$p.value/(gayfish$p.value +1)
+effectivenessgay = gayfish$estimate/(gayfish$estimate +1)*100
+print(effectivenessgay)
+```
+
+```{r}
+low=(gayfish$conf.int[1]/(gayfish$conf.int[1] +1))*100
+hi=(gayfish$conf.int[2]/(gayfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+Above is the effectiveness for the covid-19 vaccine for LGBTQ. If the effectiveness is above 50% that means that the vaccine is effective. Based on the interval seen above, we can conclude that the vaccine is ineffective in protecting LGBTQ from getting covid-19. 
+
+The odds ratio is approximately how effective the vaccine is. The odds ratio for the LGBTQ can be seen above as 29. The effectiveness confidence interval for the LGBTQ is 24.45 to 36.56.
+
+# Conclusions and recommendations
+We reject the null hypothesis, because there is a difference in covid-19 vaccine effectiveness among different subgroups (males,females, drug users and LGBTQ). Vaccine effectiveness varies between subgroups and each subgroup had a different P value, thus their different rate of effectiveness in all subgroups after receiving the vaccine.
+
+Males vaccinated had 2:1 of contracting covid-19 after vaccination, thus it is ineffective for males with a P value of 0.0005801, which is too low. this indicates strong evidence against the null hypothesis, so we reject the null hypothesis. In conclusion males should not take the vaccine, because it is ineffective at protecting males from covid-19.
+
+Females were 1:2 odds of contracting covid-19 after vaccination with a p value of <2e-16 (0.000000000000002) which is too low, this indicates strong evidence against the null hypothesis, so we reject the null hypothesis. In conclusion women should take the vaccine as it is effective at protecting females from covid-19.
+
+Drug users were 1:2 odds of contracting covid-19 after vaccination with a p value of 0.002 which is too low, this indicates strong evidence against the null hypothesis, so we reject the null hypothesis. In conclusion drug users should take the vaccine as it is effective at protecting drug users from covid-19.
+
+LGBTQ had a 5:3 odds of contracting covid-19 after vaccination with a p value of 0.00006 which is too low, this indicates strong evidence against the null hypothesis, so we reject the null hypothesis. In conclusion LGBTQ should not get the vaccine as it is ineffective at protecting females from covid-19.
+
+To reiterate it is clear thatbthere is a difference in covid-19 vaccine effectiveness between different subgroups, thus we reject the null hypothesis. The vaccine is effective at fighting covid-19 for females and drug users, but ineffective for males and LGBTQ. 
