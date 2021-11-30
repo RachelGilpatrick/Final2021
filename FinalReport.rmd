@@ -145,10 +145,15 @@ basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment))
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```
 
+
+
+
+
+
 This plot represents the population of gals(females) and the relationship to the contraction of covid-19 by either taking the vaccine or the placebo. 
 
 
-The plot above shows that only 33% of the gals that took the vaccine did in fact get covid-19, while 67% of the people taking the placebo contracted covid-19.  A substantially higher percentage of people who took tha vaccine contracted covid-19 versus those who were only given the placebo. The vaccine appears to be effective in protection against covid-19 for the gals (females). The odds of getting covid-19 while taking the vaccine is 1:3. The women that took the drug were half as likely to get covid-19 than those taking the placebo.
+The plot above shows that only 33% of the gals that took the vaccine did in fact get covid-19, while 67% of the people taking the placebo contracted covid-19.  A substantially higher percentage of people who took the vaccine contracted covid-19 versus those who were only given the placebo. The vaccine appears to be effective in protection against covid-19 for the gals (females). The odds of getting covid-19 while taking the vaccine is 1:3. The women that took the drug were half as likely to get covid-19 than those taking the placebo.
 
 
 There are two plots. In first plot,the x-axis represents infected, whether the participants were infected with covid-19 or they were not. The y-axis represents the count, or number of gals that got covid-19 or not.
@@ -160,37 +165,48 @@ The codes that  create this plot start with the code block beginning with dd2. d
 
 ### Numerical Results
 
+
+
+
 ```{r}
 table1 <- xtabs(~infected + treatment, data=gal)
 rowPerc(table1)
 colPerc(table1)
 ```
+These numerical results show specific percentages of gals(females) that got covid-19 after taking the placebo and taking the vaccine.
+among the gals, 33% got covid-19 after taking the vaccine, while approximately 67% of the gals that were given the placebo contracted covid-19. The vaccine is clearly effetive in preventing covid-19 in gals(females) and it is not recommended. Those who took the placebo were much less likely to contract covid-19.
+The odds of getting covid-19 for gals while taking the vaccine is 1:2. The gals taht took the drug were half as likely to get covid-19 (33%) than those taking the placebo (67%).
 
 ### Inferential Results
 
 ```{r}
 chisq.test(table1)
 chisqtestGC(table1)
-galsfish <- fisher.test(table1)
-galsfish
-```
-The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 4e-16. This is an awfully small number. seeing this number means that these results are not likely to occur by chance.
-
-
-
-The null hypothesis predicted that the deaths related to covid-19 are independent of sex. Since it is clear that sex does play a role in the death rate of individuals, the alternative hypothesis, that there is a correlation between covid-19 deaths and sex, is the favorable option.
-
-The odd ratio above illustrates a ratio of 2.00. the gals(females) who received the vaccine were 1.5 times more likely to get covid-19 than those who received the placebo. 
-
-```{r}
-effect <- galsfish$p.value/(galsfish$p.value +1)
-effectivenessguy = galsfish$estimate/(galsfish$estimate +1)*100
-print(effectivenessguy)
+galfish <- fisher.test(table1)
+galfish
 ```
 
+
+
+
+The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 2e-16. This is an awfully small number. This number means that these results are not likely to occur by chance.
+
+
+
+The null hypothesis predicted that the infections rate related to covid-19 vaccination effectiveness are independent of subgroup. Since it is clear that subgroup does play a role in the covid infection rate in the vaccinated individuals, the alternative hypothesis, that there is a correlation between covid-19 vaccination effectiveness and subgroups, is the favorable option.
+
+The odd ratio above illustrates a ratio of 2.00. the gals(females) who received the vaccine were half as likely to get covid-19 than those who received the placebo. 
+
 ```{r}
-low=(galsfish$conf.int[1]/(galsfish$conf.int[1] +1))*100
-hi=(galsfish$conf.int[2]/(galsfish$conf.int[2] +1))*100
+effect <- galfish$p.value/(galfish$p.value +1)
+effectivenessgal = galfish$estimate/(galfish$estimate +1)*100
+print(effectivenessgal)
+```
+
+
+```{r}
+low=(galfish$conf.int[1]/(galfish$conf.int[1] +1))*100
+hi=(galfish$conf.int[2]/(galfish$conf.int[2] +1))*100
 options(digits=2)
 ```
 
